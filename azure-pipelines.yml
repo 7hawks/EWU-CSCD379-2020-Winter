@@ -35,3 +35,5 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*Tests*.csproj'
+
+- task: PublishBuildArtifacts@1
