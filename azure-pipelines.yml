@@ -9,7 +9,10 @@ trigger:
     - '*' 
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
 
 variables:
   solution: '**/*.sln'
@@ -17,6 +20,22 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '3.1.x'
+- task: DotNetCoreCLI@2
+
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'SecretSanta/src/SecretSanta.Web'
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
